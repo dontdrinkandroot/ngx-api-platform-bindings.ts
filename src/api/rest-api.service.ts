@@ -4,9 +4,9 @@ import {Observable} from 'rxjs';
 import {CollectionResult} from './collection-result';
 import {map} from 'rxjs/operators';
 import {PartialCollectionView} from './partial-collection-view';
-import {StringUtils, UrlInfo} from '@dontdrinkandroot/angular-extensions';
+import {StringUtils, UrlInfo} from '@dontdrinkandroot/ngx-extensions';
 
-export const REST_API_BASE = new InjectionToken<string>('DDR_API_PLATFORM_REST_API_BASE');
+export const DDR_REST_API_BASE = new InjectionToken<string>('DDR_REST_API_BASE');
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +15,7 @@ export class RestApiService
 {
     protected restApiBaseInfo: UrlInfo;
 
-    constructor(protected httpClient: HttpClient, @Inject(REST_API_BASE) protected restApiBase: string)
+    constructor(protected httpClient: HttpClient, @Inject(DDR_REST_API_BASE) protected restApiBase: string)
     {
         this.restApiBaseInfo = UrlInfo.parse(restApiBase);
     }

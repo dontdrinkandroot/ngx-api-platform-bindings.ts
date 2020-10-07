@@ -2,7 +2,7 @@ import {RestResourceService} from './rest-resource.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map, shareReplay, switchMap, tap} from 'rxjs/operators';
 import {CollectionResult} from '../api/collection-result';
-import {CollectionUtils} from '@dontdrinkandroot/angular-extensions';
+import {CollectionUtils} from '@dontdrinkandroot/ngx-extensions';
 
 export abstract class CachedRestResourceService<T> extends RestResourceService<T>
 {
