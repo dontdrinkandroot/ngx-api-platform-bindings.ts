@@ -1,12 +1,11 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Inject, Injectable, InjectionToken} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {CollectionResult} from './collection-result';
 import {map} from 'rxjs/operators';
 import {PartialCollectionView} from './partial-collection-view';
 import {StringUtils, UrlInfo} from '@dontdrinkandroot/ngx-extensions';
-
-export const DDR_REST_API_BASE = new InjectionToken<string>('DDR_REST_API_BASE');
+import {DDR_REST_API_BASE} from '../ddr-api-platform-bindings.module';
 
 @Injectable({
     providedIn: 'root'
