@@ -5,6 +5,8 @@
         "ng": "ng"
     },
     "peerDependencies": {
+        "@angular/common": "^12.0",
+        "@angular/core": "^12.0",
         "@dontdrinkandroot/ngx-extensions": "^0.0"
     },
     "dependencies": {
