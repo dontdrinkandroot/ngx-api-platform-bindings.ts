@@ -8,7 +8,7 @@
     "peerDependencies": {
         "@angular/common": "^12.0",
         "@angular/core": "^12.0",
-        "@dontdrinkandroot/ngx-extensions": "^0.0"
+        "@dontdrinkandroot/ngx-extensions": "^0.1"
     },
     "dependencies": {
         "tslib": "^2.3.1"
@@ -30,7 +30,7 @@
         "@angular/platform-browser": "~12.2.7",
         "@angular/platform-browser-dynamic": "~12.2.7",
         "@angular/router": "~12.2.7",
-        "@dontdrinkandroot/ngx-extensions": "^0.0.5",
+        "@dontdrinkandroot/ngx-extensions": "^0.1",
         "@types/jasmine": "~3.6.0",
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "^12.11.1",
