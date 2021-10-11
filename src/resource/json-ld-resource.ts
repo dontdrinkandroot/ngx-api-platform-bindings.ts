@@ -1,5 +1,5 @@
-export class JsonLdResource
+export interface JsonLdResource
 {
-    '@id': string;
-    '@href': string;
+    '@id'?: string;
+    '@href'?: string;
 }
