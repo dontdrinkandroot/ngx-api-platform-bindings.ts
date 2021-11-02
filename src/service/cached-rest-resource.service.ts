@@ -3,8 +3,9 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map, shareReplay, switchMap, tap} from 'rxjs/operators';
 import {CollectionResult} from '../api/collection-result';
 import {CollectionUtils} from '@dontdrinkandroot/ngx-extensions';
+import {JsonLdResource} from '../resource/json-ld-resource';
 
-export abstract class CachedRestResourceService<T> extends RestResourceService<T>
+export abstract class CachedRestResourceService<T extends object> extends RestResourceService<T>
 {
     private nodeUriHash: Map<string, T> = null;
 
@@ -55,7 +56,7 @@ export abstract class CachedRestResourceService<T> extends RestResourceService<T
         );
     }
 
-    protected postProcessListResult(result: CollectionResult<T>)
+    protected postProcessListResult(result: CollectionResult<T & JsonLdResource>)
     {
         this.nodeUriHash = CollectionUtils.mapByProperty(result, '@id');
     }
