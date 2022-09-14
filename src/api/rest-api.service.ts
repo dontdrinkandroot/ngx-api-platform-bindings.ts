@@ -126,17 +126,19 @@ export class RestApiService
 
     public transformToCollectionResult<T>(result: any): CollectionResult<T>
     {
-        const collectionResult = new CollectionResult<T>();
+        let partialCollectionView = null;
+        if (result.hasOwnProperty('hydra:view')) {
+            partialCollectionView = this.transformToPartialCollectionView(result['hydra:view']);
+        }
+
+        const collectionResult = new CollectionResult<T>(
+            result['hydra:totalItems'],
+            partialCollectionView
+        );
 
         for (let member of result['hydra:member']) {
             member = this.prepareEntity(member);
             collectionResult.push(member);
-        }
-
-        collectionResult.totalItems = result['hydra:totalItems'];
-
-        if (result.hasOwnProperty('hydra:view')) {
-            collectionResult.partialCollectionView = this.transformToPartialCollectionView(result['hydra:view']);
         }
 
         return collectionResult;
@@ -144,12 +146,19 @@ export class RestApiService
 
     protected transformToPartialCollectionView(viewData: any): PartialCollectionView
     {
-        const partialCollectionView = new PartialCollectionView();
-        partialCollectionView.first = this.absolutizeUrl(viewData['hydra:first']);
-        partialCollectionView.next = this.absolutizeUrl(viewData['hydra:next']);
-        partialCollectionView.previous = this.absolutizeUrl(viewData['hydra:previous']);
-        partialCollectionView.last = this.absolutizeUrl(viewData['hydra:last']);
-
-        return partialCollectionView;
+        return new PartialCollectionView(
+            this.absolutizeUrl(viewData['hydra:first']) ?? (() => {
+                throw new Error('First not found');
+            })(),
+            this.absolutizeUrl(viewData['hydra:next']) ?? (() => {
+                throw new Error('First not found');
+            })(),
+            this.absolutizeUrl(viewData['hydra:previous']) ?? (() => {
+                throw new Error('First not found');
+            })(),
+            this.absolutizeUrl(viewData['hydra:last']) ?? (() => {
+                throw new Error('First not found');
+            })()
+        );
     }
 }

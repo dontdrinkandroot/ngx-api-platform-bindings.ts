@@ -1,8 +1,11 @@
 export class PartialCollectionView
 {
-    nodeId: string;
-    first: string;
-    next: string;
-    previous: string;
-    last: string;
+    constructor(
+        public readonly first: string,
+        public readonly next: string,
+        public readonly previous: string,
+        public readonly last: string
+    )
+    {
+    }
 }

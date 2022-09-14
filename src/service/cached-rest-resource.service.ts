@@ -7,16 +7,13 @@ import {JsonLdResource} from '../resource/json-ld-resource';
 
 export abstract class CachedRestResourceService<T extends object> extends RestResourceService<T>
 {
-    private nodeUriHash: Map<string, T> = null;
+    private nodeUriHash: Map<string, T> | null = null;
 
     private refresh$ = new BehaviorSubject(undefined);
 
-    private listResult$: Observable<CollectionResult<T>>;
+    private listResult$: Observable<CollectionResult<T>> | null = null;
 
-    /**
-     * @override
-     */
-    public list(params: {} = {}): Observable<CollectionResult<T>>
+    public override list(params: {} = {}): Observable<CollectionResult<T>>
     {
         /* If no custom parameters are defined cache the list result. */
         if (Object.keys(params).length === 0) {
@@ -48,7 +45,10 @@ export abstract class CachedRestResourceService<T extends object> extends RestRe
                 }
 
                 if ('string' === typeof resource) {
-                    return this.nodeUriHash.get(resource);
+                    if (null == this.nodeUriHash) {
+                        throw new Error('Node URI Hash was not initialized');
+                    }
+                    return this.nodeUriHash.get(resource) ?? null;
                 }
 
                 return resource;

@@ -19,7 +19,7 @@ export abstract class RestResourceService<T>
         return this.restApiService.getCollectionResult(this.getEndpointUrl(), params);
     }
 
-    public save(resource: T | JsonLdResource): Observable<T>
+    public save(resource: T & JsonLdResource): Observable<T>
     {
         if (null != resource['@href']) {
             return this.restApiService.putSingleResult(resource['@href'], resource);
@@ -28,10 +28,10 @@ export abstract class RestResourceService<T>
         }
     }
 
-    public delete(resource: T | JsonLdResource): Observable<any>
+    public delete(resource: T & JsonLdResource): Observable<any>
     {
         if (null == resource['@href']) {
-            return throwError('No @href found for resource');
+            return throwError(() => new Error('No @href found for resource'));
         }
 
         return this.restApiService.delete(resource['@href']);
