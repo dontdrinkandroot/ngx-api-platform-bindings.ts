@@ -1,10 +1,10 @@
 export class PartialCollectionView
 {
     constructor(
-        public readonly first: string,
-        public readonly next: string,
-        public readonly previous: string,
-        public readonly last: string
+        public readonly first: string | null,
+        public readonly next: string | null,
+        public readonly previous: string | null,
+        public readonly last: string | null
     )
     {
     }

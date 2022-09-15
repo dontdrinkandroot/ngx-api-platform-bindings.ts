@@ -147,18 +147,10 @@ export class RestApiService
     protected transformToPartialCollectionView(viewData: any): PartialCollectionView
     {
         return new PartialCollectionView(
-            this.absolutizeUrl(viewData['hydra:first']) ?? (() => {
-                throw new Error('First not found');
-            })(),
-            this.absolutizeUrl(viewData['hydra:next']) ?? (() => {
-                throw new Error('First not found');
-            })(),
-            this.absolutizeUrl(viewData['hydra:previous']) ?? (() => {
-                throw new Error('First not found');
-            })(),
-            this.absolutizeUrl(viewData['hydra:last']) ?? (() => {
-                throw new Error('First not found');
-            })()
+            this.absolutizeUrl(viewData['hydra:first']),
+            this.absolutizeUrl(viewData['hydra:next']),
+            this.absolutizeUrl(viewData['hydra:previous']),
+            this.absolutizeUrl(viewData['hydra:last'])
         );
     }
 }
