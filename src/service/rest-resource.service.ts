@@ -9,12 +9,12 @@ export abstract class RestResourceService<T>
     {
     }
 
-    public find(id: any): Observable<T>
+    public find(id: any): Observable<T & JsonLdResource>
     {
         return this.restApiService.getSingleResult(this.getResourceUrl(id));
     }
 
-    public list(params: {} = {}): Observable<CollectionResult<T>>
+    public list(params: {} = {}): Observable<CollectionResult<T & JsonLdResource>>
     {
         return this.restApiService.getCollectionResult(this.getEndpointUrl(), params);
     }
