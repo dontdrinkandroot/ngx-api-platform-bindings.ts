@@ -95,12 +95,12 @@ export class RestApiService
 
     protected prepareEntity<T>(data: any): T
     {
-        if (null != data && data.hasOwnProperty('@id')) {
+        if (null != data && data.hasOwn('@id')) {
             data['@href'] = this.absolutizeUrl(data['@id']);
 
             /* Check for embedded sub entities */
             for (const property in data) {
-                if (data.hasOwnProperty(property)) {
+                if (data.hasOwn(property)) {
                     const propertyValue = data[property];
                     if ('object' === typeof propertyValue) {
                         if (Array.isArray(propertyValue)) {
@@ -127,7 +127,7 @@ export class RestApiService
     public transformToCollectionResult<T>(result: any): CollectionResult<T>
     {
         let partialCollectionView = null;
-        if (result.hasOwnProperty('hydra:view')) {
+        if (result.hasOwn('hydra:view')) {
             partialCollectionView = this.transformToPartialCollectionView(result['hydra:view']);
         }
 

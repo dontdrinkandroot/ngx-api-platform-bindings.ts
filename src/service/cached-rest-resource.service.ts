@@ -58,6 +58,6 @@ export abstract class CachedRestResourceService<T extends object> extends RestRe
 
     protected postProcessListResult(result: CollectionResult<T & JsonLdResource>)
     {
-        this.nodeUriHash = CollectionUtils.mapByProperty(result, '@id');
+        this.nodeUriHash = CollectionUtils.mapByProperty(result, '@id') as Map<string, T & JsonLdResource>;
     }
 }
