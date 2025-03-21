@@ -49,6 +49,14 @@ export class RestApiService
         }));
     }
 
+    public patchSingleResult<T>(
+        url: string, body: any = null, params?: HttpParams | { [param: string]: string | string[]; }): Observable<T>
+    {
+        return this.httpClient.patch<T>(url, body, {params}).pipe(map((result) => {
+            return this.transformToSingleResult<T>(result);
+        }));
+    }
+
     public postSingleResult<T>(
         url: string, body: any = null, params?: HttpParams | { [param: string]: string | string[]; }): Observable<T>
     {
@@ -67,6 +75,14 @@ export class RestApiService
         url: string, body: any = null, params?: HttpParams | { [param: string]: string | string[]; }): Observable<T>
     {
         return this.httpClient.put<T>(url, body, {params}).pipe(map((result) => {
+            return this.transformToSingleResult<T>(result);
+        }));
+    }
+
+    public patch<T>(
+        url: string, body: any = null, params?: HttpParams | { [param: string]: string | string[]; }): Observable<T>
+    {
+        return this.httpClient.patch<T>(url, body, {params}).pipe(map((result) => {
             return this.transformToSingleResult<T>(result);
         }));
     }
